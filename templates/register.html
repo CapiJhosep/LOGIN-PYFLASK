@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="logreg-box">
+    <div class="form-box register">
+        <form method="post" action="/register" id="register-form">
+            <h2>Sign Up</h2>
+            <p class="subtitle">Create a new account</p>
+            
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="input-box">
+                <span class="icon"><i class="bx bxs-user"></i></span>
+                <input type="text" name="username" id="username" placeholder="Enter your username" required minlength="3" maxlength="20">
+                <label for="username">Username</label>
+                <small id="username-error" class="error-message"></small>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required minlength="8">
+                <label for="password">Password</label>
+                <small id="password-error" class="error-message"></small>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><i class="bx bxs-lock-alt"></i></span>
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your password" required>
+                <label for="confirm-password">Confirm Password</label>
+                <small id="confirm-password-error" class="error-message"></small>
+            </div>
+
+            <div class="terms">
+                <label for="terms" class="terms-label">
+                    <input type="checkbox" name="terms" id="terms" required>
+                    I agree to the <a href="/terms" target="_blank">Terms and Conditions</a>
+                </label>
+                <small id="terms-error" class="error-message"></small>
+            </div>
+
+            <button type="submit" class="btn" id="submit-btn">Sign Up</button>
+
+            <div class="already-have-account">
+                <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+            </div>
+        </form>
+
+        <div class="media-options">
+            <a href="#">
+                <i class="bx bxl-google"></i>
+                <span> Sign Up with Google </span>
+            </a>
+
+            <a href="#">
+                <i class="bx bxl-facebook"></i>
+                <span> Sign Up with Facebook </span>
+            </a>
+
+            <a href="#">
+                <i class="bx bxl-github"></i>
+                <span> Sign Up with GitHub </span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='register.js') }}"></script>
+{% endblock %}
